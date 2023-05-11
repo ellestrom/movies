@@ -8,6 +8,10 @@ export default function MovieList() {
 
   function addMovie(event) {
     event.preventDefault();
+    if (!inputRef.current.value.trim() || ratingRef.current.value === "0") {
+      alert("Please fill in all fields.");
+      return;
+    }
     const newId = movies.length > 0 ? movies[movies.length - 1].id + 1 : 1;
     const newMovie = {
       id: newId,
@@ -18,7 +22,7 @@ export default function MovieList() {
     inputRef.current.value = "";
     ratingRef.current.value = "0";
   }
-
+  
   function deleteMovie(id) {
     setMovies(movies.filter((item) => item.id !== id));
   }
