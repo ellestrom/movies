@@ -1,11 +1,8 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Movie from './Movie';
 
 export default function MovieList() {
-  const [movies, setMovies] = useState([
-    { id: 1, title: "First Movie", rating: 3 },
-  ]);
-
+  const [movies, setMovies] = useState(() => JSON.parse(localStorage.getItem("movies")) || []);
   const inputRef = useRef();
   const ratingRef = useRef();
 
@@ -36,6 +33,17 @@ export default function MovieList() {
     });
     setMovies(sortedMovies);
   }
+
+  useEffect(() => {
+    const storedMovies = localStorage.getItem('movies');
+    if (storedMovies) {
+      setMovies(JSON.parse(storedMovies));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('movies', JSON.stringify(movies));
+  }, [movies]);
 
   return (
     <div>
