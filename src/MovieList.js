@@ -41,4 +41,4 @@ function deleteMovie(id) {
     )
 }
 
-// hej funkar detta? 
+// hej funkar detta? mvh 
