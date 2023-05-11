@@ -26,12 +26,21 @@ export default function MovieList() {
     setMovies(movies.filter((item) => item.id !== id));
   }
 
+  function sortMovies(order) {
+    const sortedMovies = [...movies].sort((a, b) => {
+      if (order === "asc") {
+        return a.title.localeCompare(b.title, "sv");
+      } else {
+        return b.title.localeCompare(a.title, "sv");
+      }
+    });
+    setMovies(sortedMovies);
+  }
+
   return (
     <div>
-      <h1>Min filmlista</h1>
       <form onSubmit={addMovie}>
         <fieldset>
-          <legend>Lägg till en film</legend>
 
           <label htmlFor="title-field">Titel:</label>
           <input type="text" id="title-field" className="form-control" ref={inputRef} />
@@ -46,9 +55,13 @@ export default function MovieList() {
             <option value="5">5</option>
           </select>
 
-          <input type="submit" className="btn btn-success mt-3" value="Spara film" />
+          <button type="submit" className="btn btn-success mt-3">Spara film</button>
         </fieldset>
       </form>
+      <div className="sort-buttons mt-3">
+        <button className="btn btn-primary" onClick={() => sortMovies("asc")}>Sortera A-Ö</button>
+        <button className="btn btn-primary" onClick={() => sortMovies("desc")}>Sortera Ö-A</button>
+      </div>
       <ul className="list-group">
         {movies.map((movie) => (
           <Movie key={movie.id} item={movie} deleteMovie={deleteMovie} />
