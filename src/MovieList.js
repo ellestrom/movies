@@ -40,5 +40,3 @@ function deleteMovie(id) {
         </div>
     )
 }
-
-// hej funkar detta? mvh 
