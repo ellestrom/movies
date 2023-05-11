@@ -40,3 +40,5 @@ function deleteMovie(id) {
         </div>
     )
 }
+
+// hej maneten
